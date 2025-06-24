@@ -19,6 +19,12 @@ class FormAdmin(admin.ModelAdmin):
         "date", "occupation"
     )
     ordering = ("date",)
-    readonly_fields = ("occupation",)
+    readonly_fields = (
+        "first_name",
+        "last_name",
+        "email",
+        "date"
+    )
 
+# Register models on adming page.
 admin.site.register(Form, FormAdmin)

@@ -25,7 +25,8 @@ def index(request):
             )
 
             # Sending email
-            message_body = f"A new job Application was submitted.\n{first_name}"
+            message_body = f"A new job Application was submitted.\n{
+                first_name}"
             email_message = EmailMessage(
                 "Form Submission Confirmation",
                 message_body,
