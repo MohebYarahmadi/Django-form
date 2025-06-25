@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Form
+from .models import Form, Contact
 
 
 class FormAdmin(admin.ModelAdmin):
@@ -23,8 +23,23 @@ class FormAdmin(admin.ModelAdmin):
         "first_name",
         "last_name",
         "email",
-        "date"
+        "date",
+        "occupation"
     )
+
+
+class ContactAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "email"
+    )
+    readonly_fields = (
+        "name",
+        "email",
+        "message"
+    )
+
 
 # Register models on adming page.
 admin.site.register(Form, FormAdmin)
+admin.site.register(Contact, ContactAdmin)

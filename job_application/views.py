@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .forms import ApplicationForm
-from .models import Form
+from .forms import ApplicationForm, ContactForm
+from .models import Form, Contact
 from django.contrib import messages
 from django.core.mail import EmailMessage
 
@@ -41,3 +41,23 @@ def index(request):
 
 def about(request):
     return render(request, "about.html")
+
+
+def contact(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            email = form.cleaned_data["email"]
+            message = form.cleaned_data["message"]
+
+            # save data on database using model
+            Contact.objects.create(
+                name=name,
+                email=email,
+                message=message
+            )
+
+            messages.success(request, "Thank you for your message.")
+
+    return render(request, "contactus.html")
